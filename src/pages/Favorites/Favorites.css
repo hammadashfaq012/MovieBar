@@ -1,0 +1,42 @@
+.favorites {
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.favorites h1 {
+  margin: 0;
+  color: #f2f2f0;
+  font-size: 32px;
+}
+
+.favorites-empty {
+  margin-top: 48px;
+}
+
+.favorites-empty-title {
+  margin: 0 0 8px;
+  color: #f2f2f0;
+  font-size: 22px;
+}
+
+.favorites-empty-text {
+  margin: 0 0 24px;
+  color: #a5a9b0;
+  font-size: 16px;
+}
+
+.favorites-empty-link {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f2f2f0;
+  background-color: #b83a42;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.favorites-empty-link:hover {
+  background-color: #d04a52;
+  text-decoration: none;
+}

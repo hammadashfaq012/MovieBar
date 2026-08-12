@@ -1,0 +1,30 @@
+.show-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 32px auto 0;
+}
+
+.show-grid .show-card {
+  flex: 1 1 250px;
+  max-width: 320px;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .show-grid {
+    gap: 16px;
+  }
+
+  .show-grid .show-card {
+    flex-basis: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .show-grid .show-card {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}

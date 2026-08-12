@@ -1,0 +1,111 @@
+.show-card {
+  position: relative;
+  background-color: #15191f;
+  border: 1px solid #252b33;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: left;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.show-card:hover {
+  background-color: #1a1f27;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.show-card-link {
+  display: block;
+  color: #f2f2f0;
+  text-decoration: none;
+}
+
+.show-card-link:hover {
+  text-decoration: none;
+}
+
+.show-card-poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background-color: #252b33;
+  overflow: hidden;
+}
+
+.show-card-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.show-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a5a9b0;
+  font-size: 15px;
+}
+
+.show-card-content {
+  padding: 12px 14px 14px;
+}
+
+.show-card-title {
+  margin: 0 0 6px;
+  color: #f2f2f0;
+  font-size: 17px;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.show-card-rating {
+  margin: 0 0 6px;
+  color: #a5a9b0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.show-card-star {
+  color: #b83a42;
+}
+
+.show-card-genres {
+  margin: 0;
+  color: #a5a9b0;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.show-card-button {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  color: #f2f2f0;
+  background-color: rgba(11, 14, 18, 0.65);
+  border: 1px solid rgba(242, 242, 240, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.show-card-button:hover {
+  background-color: rgba(184, 58, 66, 0.85);
+}
+
+.show-card-button.is-favorite {
+  background-color: rgba(184, 58, 66, 0.92);
+}

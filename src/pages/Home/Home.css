@@ -1,0 +1,294 @@
+.home {
+  padding: 0;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 600px;
+  background-image: url('../../assets/images/hero-cinema.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to right,
+    rgba(11, 14, 18, 0.9) 0%,
+    rgba(11, 14, 18, 0.6) 50%,
+    rgba(11, 14, 18, 0.35) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  text-align: left;
+}
+
+.hero-label {
+  margin: 0 0 16px;
+  color: #b83a42;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.hero-title {
+  margin: 0 0 16px;
+  color: #f2f2f0;
+  font-size: 48px;
+  line-height: 1.2;
+}
+
+.hero-text {
+  margin: 0 0 24px;
+  color: #a5a9b0;
+  font-size: 18px;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f2f2f0;
+  background-color: #b83a42;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.hero-button:hover {
+  background-color: #d04a52;
+  text-decoration: none;
+}
+
+.hero-search {
+  margin-top: 32px;
+}
+
+.hero .search-bar {
+  margin: 0;
+}
+
+.featured {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.featured-title {
+  margin: 0 0 24px;
+  color: #f2f2f0;
+  font-size: 28px;
+  text-align: center;
+}
+
+.home-message {
+  margin: 32px 0;
+  color: #a5a9b0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.home-error {
+  color: #b83a42;
+}
+
+.featured-footer {
+  display: flex;
+  justify-content: center;
+  margin: 32px 0 24px;
+}
+
+.featured-button {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f2f2f0;
+  background-color: #15191f;
+  border: 1px solid #252b33;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.featured-button:hover {
+  background-color: #b83a42;
+  border-color: #b83a42;
+  text-decoration: none;
+}
+
+.spotlight {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.spotlight-title {
+  margin: 0 0 24px;
+  color: #f2f2f0;
+  font-size: 28px;
+  text-align: center;
+}
+
+.spotlight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.spotlight-item {
+  display: flex;
+  align-items: center;
+  background-color: #15191f;
+  border: 1px solid #252b33;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.spotlight-item-reverse {
+  flex-direction: row-reverse;
+}
+
+.spotlight-image {
+  flex: 0 0 38%;
+  height: 340px;
+}
+
+.spotlight-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.spotlight-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a5a9b0;
+  font-size: 16px;
+}
+
+.spotlight-info {
+  flex: 1;
+  padding: 28px 32px;
+}
+
+.spotlight-name {
+  margin: 0 0 10px;
+  color: #f2f2f0;
+  font-size: 28px;
+}
+
+.spotlight-rating {
+  margin: 0 0 8px;
+  color: #a5a9b0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.spotlight-star {
+  color: #b83a42;
+}
+
+.spotlight-genres {
+  margin: 0 0 16px;
+  color: #a5a9b0;
+  font-size: 14px;
+}
+
+.spotlight-meta {
+  margin: 0 0 6px;
+  color: #a5a9b0;
+  font-size: 14px;
+}
+
+.spotlight-summary {
+  margin: 14px 0 0;
+  color: #a5a9b0;
+  font-size: 14px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.spotlight-summary p {
+  margin: 0 0 4px;
+}
+
+.spotlight-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.spotlight-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f2f2f0;
+  background-color: #b83a42;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.spotlight-button:hover {
+  background-color: #d04a52;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 500px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .spotlight-item,
+  .spotlight-item-reverse {
+    flex-direction: column;
+  }
+
+  .spotlight-image {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 260px;
+  }
+
+  .spotlight-info {
+    padding: 24px;
+  }
+
+  .spotlight-name {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-button {
+    padding: 12px 24px;
+  }
+}

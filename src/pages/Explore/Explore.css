@@ -1,0 +1,32 @@
+.explore {
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.explore h1 {
+  margin: 0;
+  color: #f2f2f0;
+  font-size: 32px;
+}
+
+.explore-subtitle {
+  margin: 8px 0 0;
+  color: #a5a9b0;
+  font-size: 18px;
+}
+
+.explore-message {
+  margin: 32px 0 0;
+  font-size: 16px;
+}
+
+.explore-error {
+  color: #b83a42;
+}
+
+.explore-heading {
+  margin: 48px 0 0;
+  color: #f2f2f0;
+  font-size: 24px;
+}
+
