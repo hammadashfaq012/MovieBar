@@ -1,16 +1,77 @@
-# React + Vite
+# CineFind 🎬
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+CineFind is a React movie discovery application that uses a live API to display real movie and TV show data.
 
-Currently, two official plugins are available:
+Users can explore shows, search for movies, view detailed information, and save their favorite shows.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- 🎬 Browse movies and TV shows
+- 🔎 Search for shows
+- ⭐ Add and remove favorites
+- 💾 Favorites are saved using localStorage
+- 📄 View detailed information about a show
+- 🧭 Navigation between multiple pages
+- 📱 Responsive design for desktop and mobile
+- ⏳ Loading state while data is being fetched
+- ❌ Error state when API requests fail
+- 📭 Empty state when no results are found
+- 🌙 Dark movie-themed UI
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Pages
 
-## Expanding the Oxlint configuration
+### Home
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+The home page introduces CineFind and displays featured/recommended shows.
+
+### Explore
+
+The Explore page allows users to search and browse movies and shows from the live API.
+
+### Show Details
+
+The Show Details page displays detailed information about a selected show.
+
+### Favorites
+
+The Favorites page displays shows that the user has saved as favorites.
+
+## Technologies Used
+
+- React
+- JavaScript
+- React Router
+- CSS
+- REST API
+- LocalStorage
+- Vite
+
+## Project Structure
+
+```text
+src/
+│
+├── api/
+│   └── API related functions
+│
+├── components/
+│   ├── Navbar/
+│   ├── Footer/
+│   └── Other reusable components
+│
+├── hooks/
+│   └── useFavorites.js
+│
+├── pages/
+│   ├── Home/
+│   ├── Explore/
+│   ├── ShowDetails/
+│   └── Favorites/
+│
+├── utils/
+│   └── storage.js
+│
+├── App.jsx
+├── App.css
+├── main.jsx
+└── index.css
