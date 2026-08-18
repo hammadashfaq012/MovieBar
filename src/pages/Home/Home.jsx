@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import ShowGrid from '../../components/ShowGrid/ShowGrid'
-import { searchShows, getShows } from '../../api/api'
+import { getShows } from '../../api/api'
 import './Home.css'
 
 function Home({ favorites, addFavorite, removeFavorite }) {
