@@ -69,7 +69,7 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
     }
   }, [searchParams])
 
-  const searchResults = shows.map((result) => result.show)
+  const searchResults = shows
   const searchReady = !loading && !error
   const recommendedReady = !recommendedLoading && !recommendedError
 

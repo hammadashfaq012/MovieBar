@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import ShowGrid from '../../components/ShowGrid/ShowGrid'
-import { searchShows } from '../../api/api'
+import { searchShows, getShows } from '../../api/api'
 import './Home.css'
 
 function Home({ favorites, addFavorite, removeFavorite }) {
@@ -18,8 +18,8 @@ function Home({ favorites, addFavorite, removeFavorite }) {
       setError('')
 
       try {
-        const results = await searchShows('popular')
-        setFeaturedShows(results.map((result) => result.show).slice(0, 6))
+        const results = await getShows()
+        setFeaturedShows(results.slice(0, 6))
       } catch {
         setError('Unable to load featured shows.')
       } finally {

@@ -1,7 +1,7 @@
-const BASE_URL = 'https://api.tvmaze.com'
+const BACKEND_URL = 'http://localhost:5000'
 
 export async function getShows() {
-  const response = await fetch(`${BASE_URL}/shows?page=0`)
+  const response = await fetch(`${BACKEND_URL}/api/shows`)
 
   if (!response.ok) {
     throw new Error('Failed to fetch shows')
@@ -17,7 +17,7 @@ export async function searchShows(query) {
     return []
   }
 
-  const response = await fetch(`${BASE_URL}/search/shows?q=${trimmedQuery}`)
+  const response = await fetch(`${BACKEND_URL}/api/shows/search?q=${encodeURIComponent(trimmedQuery)}`)
 
   if (!response.ok) {
     throw new Error('Failed to search shows')
@@ -27,7 +27,7 @@ export async function searchShows(query) {
 }
 
 export async function getShowById(id) {
-  const response = await fetch(`${BASE_URL}/shows/${id}`)
+  const response = await fetch(`${BACKEND_URL}/api/shows/${id}`)
 
   if (!response.ok) {
     throw new Error('Failed to fetch show details')
