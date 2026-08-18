@@ -1,3 +1,6 @@
+// localStorage helpers — simple wrappers for reading/writing JSON data.
+// Used by the useFavorites hook to persist favorites across sessions.
+
 export function loadFromStorage(key, fallback) {
   try {
     const stored = localStorage.getItem(key)

@@ -1,3 +1,5 @@
+// Top navigation bar with links to Home, Explore, and Favorites.
+
 import { Link } from 'react-router-dom'
 import './Navbar.css'
 

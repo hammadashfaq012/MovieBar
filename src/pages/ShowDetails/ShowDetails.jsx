@@ -1,3 +1,7 @@
+// Show details page — displays full information for a single show.
+// Fetches show data by ID from the URL parameter (/show/:id).
+// Shows poster, title, rating, genres, metadata, summary, and an add/remove favorites button.
+
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getShowById } from '../../api/api'
@@ -9,6 +13,7 @@ function ShowDetails({ favorites, addFavorite, removeFavorite }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
+  // Fetch show data whenever the URL id changes
   useEffect(() => {
     async function loadShow() {
       setLoading(true)
@@ -49,6 +54,7 @@ function ShowDetails({ favorites, addFavorite, removeFavorite }) {
 
   const isFavorite = favorites.some((favorite) => favorite.id === show.id)
 
+  // Strip HTML tags from the summary for clean text display
   const plainSummary = show.summary ? show.summary.replace(/<[^>]*>/g, '') : ''
 
   function handleFavoriteClick() {

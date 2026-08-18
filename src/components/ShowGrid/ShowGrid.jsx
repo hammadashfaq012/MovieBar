@@ -1,3 +1,6 @@
+// Renders a grid of ShowCard components from an array of show objects.
+// Used on the Home, Explore, and Favorites pages.
+
 import ShowCard from '../ShowCard/ShowCard'
 import './ShowGrid.css'
 

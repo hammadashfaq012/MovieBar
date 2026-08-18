@@ -1,3 +1,8 @@
+// Explore page — main search and browse page.
+// Displays search results when a query is active, or recommended shows when idle.
+// Accepts ?search=<query> from the URL (set when navigating from Home page search).
+// Search queries the backend /api/shows/search endpoint which searches name and genres.
+
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import SearchBar from '../../components/SearchBar/SearchBar'
@@ -16,6 +21,7 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
   const [recommendedError, setRecommendedError] = useState('')
   const [hasSearched, setHasSearched] = useState(false)
 
+  // Load recommended shows from the database on mount (shown when no search is active)
   useEffect(() => {
     async function loadRecommendedShows() {
       setRecommendedLoading(true)
@@ -34,6 +40,7 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
     loadRecommendedShows()
   }, [])
 
+  // Execute a search query against the backend
   async function runSearch(searchQuery) {
     if (searchQuery.trim() === '') {
       setShows([])
@@ -56,10 +63,12 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
     }
   }
 
+  // Triggered by SearchBar submit button / Enter key
   function handleSearch() {
     runSearch(query)
   }
 
+  // Auto-search when navigated from Home page with ?search= URL param
   useEffect(() => {
     const urlQuery = searchParams.get('search')
 
@@ -69,7 +78,6 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
     }
   }, [searchParams])
 
-  const searchResults = shows
   const searchReady = !loading && !error
   const recommendedReady = !recommendedLoading && !recommendedError
 
@@ -84,6 +92,7 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
         onSearch={handleSearch}
       />
 
+      {/* Search results — shown only after a search has been performed */}
       {hasSearched && (
         <>
           {loading && <p className="explore-message">Loading shows...</p>}
@@ -92,11 +101,11 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
             <p className="explore-message explore-error">{error}</p>
           )}
 
-          {searchReady && searchResults.length > 0 && (
+          {searchReady && shows.length > 0 && (
             <>
               <h2 className="explore-heading">Search Results</h2>
               <ShowGrid
-                shows={searchResults}
+                shows={shows}
                 favorites={favorites}
                 addFavorite={addFavorite}
                 removeFavorite={removeFavorite}
@@ -104,7 +113,7 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
             </>
           )}
 
-          {searchReady && searchResults.length === 0 && (
+          {searchReady && shows.length === 0 && (
             <p className="explore-message">
               No shows found. Try a different search.
             </p>
@@ -112,6 +121,7 @@ function Explore({ favorites, addFavorite, removeFavorite }) {
         </>
       )}
 
+      {/* Recommended shows — shown when no search has been performed yet */}
       {!hasSearched && (
         <>
           {recommendedLoading && (
