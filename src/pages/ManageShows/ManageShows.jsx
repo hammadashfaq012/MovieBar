@@ -104,18 +104,18 @@ function ManageShows() {
           <table className="manage-table">
             <thead>
               <tr>
-                <th className="manage-th-image">Poster</th>
-                <th className="manage-th-name">Name</th>
+                <th>Poster</th>
+                <th>Name</th>
                 <th className="manage-th-genres">Genres</th>
-                <th className="manage-th-rating">Rating</th>
-                <th className="manage-th-status">Status</th>
-                <th className="manage-th-actions">Actions</th>
+                <th>Rating</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {shows.map((show) => (
                 <tr key={show.id} className="manage-row">
-                  <td className="manage-cell-image">
+                  <td>
                     {show.image?.medium ? (
                       <img
                         className="manage-thumb"

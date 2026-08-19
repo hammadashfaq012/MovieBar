@@ -176,28 +176,60 @@ function ShowForm({ show, onSubmit, onCancel }) {
 
           <div className="form-row">
             <label className="form-label">
-              Poster URL (medium)
+              Poster (medium)
               <input
                 className="form-input"
                 type="url"
                 name="imageMedium"
                 value={form.imageMedium}
                 onChange={handleChange}
-                placeholder="https://..."
+                placeholder="Paste image URL..."
+              />
+            </label>
+            <span className="form-or">or</span>
+            <label className="form-label form-file-label">
+              Upload from device
+              <input
+                className="form-file"
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files[0]
+                  if (!file) return
+                  const reader = new FileReader()
+                  reader.onload = () => setForm((prev) => ({ ...prev, imageMedium: reader.result }))
+                  reader.readAsDataURL(file)
+                }}
               />
             </label>
           </div>
 
           <div className="form-row">
             <label className="form-label">
-              Poster URL (original)
+              Poster (original)
               <input
                 className="form-input"
                 type="url"
                 name="imageOriginal"
                 value={form.imageOriginal}
                 onChange={handleChange}
-                placeholder="https://..."
+                placeholder="Paste image URL..."
+              />
+            </label>
+            <span className="form-or">or</span>
+            <label className="form-label form-file-label">
+              Upload from device
+              <input
+                className="form-file"
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files[0]
+                  if (!file) return
+                  const reader = new FileReader()
+                  reader.onload = () => setForm((prev) => ({ ...prev, imageOriginal: reader.result }))
+                  reader.readAsDataURL(file)
+                }}
               />
             </label>
           </div>
