@@ -1,7 +1,3 @@
-// Favorites page — displays all shows the user has added to favorites.
-// Favorites are stored in localStorage via the useFavorites hook.
-// Shows a grid of favorited shows, or an empty state with a link to Explore.
-
 import { Link } from 'react-router-dom'
 import ShowGrid from '../../components/ShowGrid/ShowGrid'
 import './Favorites.css'

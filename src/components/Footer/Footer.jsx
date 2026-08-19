@@ -1,5 +1,3 @@
-// Site footer with brand info, quick links, and social placeholders.
-
 import { Link } from 'react-router-dom'
 import './Footer.css'
 

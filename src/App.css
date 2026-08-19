@@ -1,5 +1,3 @@
-/* App shell layout — full-height flex container that keeps the footer at the bottom */
-
 .app {
   min-height: 100vh;
   display: flex;

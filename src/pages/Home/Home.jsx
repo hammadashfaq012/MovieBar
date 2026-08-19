@@ -1,8 +1,3 @@
-// Home page — landing page with hero section, search bar, featured shows, and spotlight.
-// The search bar navigates to /explore?search=<query> (does not search directly here).
-// Featured shows are loaded from MongoDB on mount (first 6 shows).
-// Spotlight shows are the first 3 featured shows displayed in a detailed alternating layout.
-
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchBar from '../../components/SearchBar/SearchBar'
@@ -17,7 +12,6 @@ function Home({ favorites, addFavorite, removeFavorite }) {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  // Load the first 6 shows from the database on mount
   useEffect(() => {
     async function loadFeaturedShows() {
       setLoading(true)
@@ -36,7 +30,6 @@ function Home({ favorites, addFavorite, removeFavorite }) {
     loadFeaturedShows()
   }, [])
 
-  // Redirect to the Explore page with the search query in the URL
   function handleSearch() {
     if (query.trim() === '') {
       return
@@ -50,7 +43,6 @@ function Home({ favorites, addFavorite, removeFavorite }) {
 
   return (
     <main className="home">
-      {/* Hero section with tagline and search */}
       <section className="hero">
         <div className="hero-overlay"></div>
         <div className="hero-content">
@@ -72,7 +64,6 @@ function Home({ favorites, addFavorite, removeFavorite }) {
         </div>
       </section>
 
-      {/* Featured shows grid (first 6 shows) */}
       <section className="featured">
         <h2 className="featured-title">Featured Shows</h2>
 
@@ -98,7 +89,6 @@ function Home({ favorites, addFavorite, removeFavorite }) {
         )}
       </section>
 
-      {/* Spotlight section — detailed cards for top 3 shows */}
       {ready && featuredShows.length > 0 && (
         <section className="spotlight">
           <h2 className="spotlight-title">Spotlight Shows</h2>
@@ -162,7 +152,6 @@ function Home({ favorites, addFavorite, removeFavorite }) {
         </section>
       )}
 
-      {/* Footer CTA linking to the Explore page */}
       <div className="featured-footer">
         <Link className="featured-button" to="/explore">
           Explore All Shows
