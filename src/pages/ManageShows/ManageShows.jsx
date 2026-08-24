@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getShows, createShow, updateShow, deleteShow } from '../../api/api'
+import { handleImageError } from '../../utils/image'
 import ShowForm from '../../components/ShowForm/ShowForm'
 import './ManageShows.css'
 
@@ -121,6 +122,9 @@ function ManageShows() {
                         className="manage-thumb"
                         src={show.image.medium}
                         alt={show.name}
+                        data-placeholder-class="manage-thumb-placeholder"
+                        data-placeholder-text="N/A"
+                        onError={handleImageError}
                       />
                     ) : (
                       <div className="manage-thumb-placeholder">N/A</div>

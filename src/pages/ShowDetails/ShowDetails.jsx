@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getShowById } from '../../api/api'
+import { handleImageError } from '../../utils/image'
 import './ShowDetails.css'
 
 function ShowDetails({ favorites, addFavorite, removeFavorite }) {
@@ -66,11 +67,13 @@ function ShowDetails({ favorites, addFavorite, removeFavorite }) {
 
       <div className="details-card">
         <div className="details-poster">
-          {show.image && (show.image.original || show.image.medium) ? (
+          {show.image?.original || show.image?.medium ? (
             <img
               className="details-poster-img"
-              src={show.image.original || show.image.medium}
+              src={show.image?.original || show.image?.medium}
               alt={show.name}
+              data-placeholder-class="details-poster-placeholder"
+              onError={handleImageError}
             />
           ) : (
             <div className="details-poster-placeholder">No Image</div>

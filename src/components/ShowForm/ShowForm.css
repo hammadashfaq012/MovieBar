@@ -89,33 +89,6 @@
   border-color: #b83a42;
 }
 
-.form-or {
-  color: #555b65;
-  font-size: 12px;
-  text-align: center;
-  margin: 4px 0;
-}
-
-.form-file-label {
-  padding: 10px 14px;
-  background-color: #0b0e12;
-  border: 1px dashed #252b33;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 14px;
-  color: #a5a9b0;
-}
-
-.form-file-label:hover {
-  border-color: #b83a42;
-  color: #f2f2f0;
-}
-
-.form-file {
-  display: none;
-}
-
 .form-textarea {
   resize: vertical;
   min-height: 80px;
@@ -165,6 +138,52 @@
 
 .form-btn-save:hover:not(:disabled) {
   background-color: #d04a52;
+}
+
+.form-upload-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-upload-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.form-upload-status {
+  color: #a5a9b0;
+  font-size: 13px;
+}
+
+.form-preview {
+  width: 64px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #252b33;
+}
+
+.form-preview-placeholder {
+  width: 64px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a5a9b0;
+  font-size: 12px;
+  background-color: #0b0e12;
+  border: 1px dashed #252b33;
+  border-radius: 6px;
+}
+
+.form-upload-error {
+  margin: 10px 0 0;
+  padding: 10px 14px;
+  color: #f2f2f0;
+  background-color: #b83a42;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
 

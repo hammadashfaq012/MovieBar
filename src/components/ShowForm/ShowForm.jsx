@@ -1,5 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { uploadImage } from '../../utils/upload'
+import { handleImageError } from '../../utils/image'
 import './ShowForm.css'
+
+const MAX_IMAGE_SIZE_MB = 5
 
 const emptyForm = {
   name: '',
@@ -14,10 +18,23 @@ const emptyForm = {
   officialSite: '',
 }
 
+function isValidHttpUrl(value) {
+  try {
+    const url = new URL(value)
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
 function ShowForm({ show, onSubmit, onCancel }) {
   const [form, setForm] = useState(emptyForm)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState('')
+  const submittingRef = useRef(false)
+  const uploadingRef = useRef(false)
 
   useEffect(() => {
     if (show) {
@@ -43,40 +60,95 @@ function ShowForm({ show, onSubmit, onCancel }) {
     setForm((prev) => ({ ...prev, [name]: value }))
   }
 
+  async function handleFileChange(event) {
+    const file = event.target.files[0]
+    event.target.value = ''
+
+    if (!file) return
+
+    if (uploadingRef.current) return
+
+    if (!file.type || !file.type.startsWith('image/')) {
+      setUploadError('Please select an image file.')
+      return
+    }
+
+    if (file.size > MAX_IMAGE_SIZE_MB * 1024 * 1024) {
+      setUploadError(`Image must be smaller than ${MAX_IMAGE_SIZE_MB}MB.`)
+      return
+    }
+
+    setUploadError('')
+    setUploading(true)
+    uploadingRef.current = true
+
+    try {
+      const url = await uploadImage(file)
+      setForm((prev) => ({ ...prev, imageMedium: url }))
+    } catch (err) {
+      setUploadError(err?.message || 'Failed to upload image. Please try again.')
+    } finally {
+      setUploading(false)
+      uploadingRef.current = false
+    }
+  }
+
   async function handleSubmit(event) {
     event.preventDefault()
 
+    if (submittingRef.current) return
+    submittingRef.current = true
+
     if (form.name.trim() === '') {
       setError('Show name is required.')
+      submittingRef.current = false
       return
+    }
+
+    const urlFields = [
+      ['Poster (medium)', form.imageMedium],
+      ['Poster (original)', form.imageOriginal],
+      ['Official Website', form.officialSite],
+    ]
+
+    for (const [label, value] of urlFields) {
+      const trimmed = value.trim()
+      if (trimmed !== '' && !isValidHttpUrl(trimmed)) {
+        setError(
+          `${label} must be a valid URL starting with http:// or https://`
+        )
+        submittingRef.current = false
+        return
+      }
     }
 
     setSaving(true)
     setError('')
 
-    const payload = {
-      name: form.name.trim(),
-      summary: form.summary.trim(),
-      image: {
-        medium: form.imageMedium.trim(),
-        original: form.imageOriginal.trim(),
-      },
-      genres: form.genres
-        ? form.genres.split(',').map((g) => g.trim()).filter(Boolean)
-        : [],
-      rating: { average: parseFloat(form.rating) || 0 },
-      language: form.language.trim(),
-      status: form.status,
-      runtime: form.runtime ? Number(form.runtime) : null,
-      officialSite: form.officialSite.trim(),
-    }
-
     try {
+      const payload = {
+        name: form.name.trim(),
+        summary: form.summary.trim(),
+        image: {
+          medium: form.imageMedium.trim(),
+          original: form.imageOriginal.trim(),
+        },
+        genres: form.genres
+          ? form.genres.split(',').map((g) => g.trim()).filter(Boolean)
+          : [],
+        rating: { average: parseFloat(form.rating) || 0 },
+        language: form.language.trim(),
+        status: form.status,
+        runtime: form.runtime ? Number(form.runtime) : null,
+        officialSite: form.officialSite.trim(),
+      }
+
       await onSubmit(payload)
-    } catch {
-      setError('Something went wrong. Please try again.')
+    } catch (err) {
+      setError(err?.message || 'Something went wrong. Please try again.')
     } finally {
       setSaving(false)
+      submittingRef.current = false
     }
   }
 
@@ -175,6 +247,36 @@ function ShowForm({ show, onSubmit, onCancel }) {
           </div>
 
           <div className="form-row">
+            <label className="form-label">Poster Image</label>
+            <div className="form-upload-controls">
+              <label className="form-btn form-btn-cancel form-upload-label">
+                {uploading ? 'Uploading...' : 'Upload from Computer'}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  disabled={uploading}
+                  hidden
+                />
+              </label>
+              {form.imageMedium && (
+                <img
+                  className="form-preview"
+                  src={form.imageMedium}
+                  alt="Poster preview"
+                  data-placeholder-class="form-preview-placeholder"
+                  data-placeholder-text="No preview"
+                  onError={handleImageError}
+                />
+              )}
+              {uploading && (
+                <span className="form-upload-status">Uploading image...</span>
+              )}
+            </div>
+            {uploadError && <p className="form-upload-error">{uploadError}</p>}
+          </div>
+
+          <div className="form-row form-row-2">
             <label className="form-label">
               Poster (medium)
               <input
@@ -184,27 +286,9 @@ function ShowForm({ show, onSubmit, onCancel }) {
                 value={form.imageMedium}
                 onChange={handleChange}
                 placeholder="Paste image URL..."
+                disabled={saving}
               />
             </label>
-            <span className="form-or">or</span>
-            <label className="form-label form-file-label">
-              Upload from device
-              <input
-                className="form-file"
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0]
-                  if (!file) return
-                  const reader = new FileReader()
-                  reader.onload = () => setForm((prev) => ({ ...prev, imageMedium: reader.result }))
-                  reader.readAsDataURL(file)
-                }}
-              />
-            </label>
-          </div>
-
-          <div className="form-row">
             <label className="form-label">
               Poster (original)
               <input
@@ -214,22 +298,7 @@ function ShowForm({ show, onSubmit, onCancel }) {
                 value={form.imageOriginal}
                 onChange={handleChange}
                 placeholder="Paste image URL..."
-              />
-            </label>
-            <span className="form-or">or</span>
-            <label className="form-label form-file-label">
-              Upload from device
-              <input
-                className="form-file"
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0]
-                  if (!file) return
-                  const reader = new FileReader()
-                  reader.onload = () => setForm((prev) => ({ ...prev, imageOriginal: reader.result }))
-                  reader.readAsDataURL(file)
-                }}
+                disabled={saving}
               />
             </label>
           </div>
@@ -267,14 +336,14 @@ function ShowForm({ show, onSubmit, onCancel }) {
               type="button"
               className="form-btn form-btn-cancel"
               onClick={onCancel}
-              disabled={saving}
+              disabled={saving || uploading}
             >
               Cancel
             </button>
             <button
               type="submit"
               className="form-btn form-btn-save"
-              disabled={saving}
+              disabled={saving || uploading}
             >
               {saving ? 'Saving...' : show ? 'Save Changes' : 'Add Show'}
             </button>

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import ShowGrid from '../../components/ShowGrid/ShowGrid'
+
 import { getShows } from '../../api/api'
+import { handleImageError } from '../../utils/image'
 import './Home.css'
 
 function Home({ favorites, addFavorite, removeFavorite }) {
@@ -103,11 +105,13 @@ function Home({ favorites, addFavorite, removeFavorite }) {
                 key={show.id}
               >
                 <div className="spotlight-image">
-                  {show.image && (show.image.original || show.image.medium) ? (
+                  {show.image?.original || show.image?.medium ? (
                     <img
                       className="spotlight-img"
-                      src={show.image.original || show.image.medium}
+                      src={show.image?.original || show.image?.medium}
                       alt={show.name}
+                      data-placeholder-class="spotlight-placeholder"
+                      onError={handleImageError}
                     />
                   ) : (
                     <div className="spotlight-placeholder">No Image</div>

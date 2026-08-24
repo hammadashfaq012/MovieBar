@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { handleImageError } from '../../utils/image'
 import './ShowCard.css'
 
 function ShowCard({ show, isFavorite, onAddFavorite, onRemoveFavorite }) {
@@ -21,11 +22,13 @@ function ShowCard({ show, isFavorite, onAddFavorite, onRemoveFavorite }) {
     <article className="show-card">
       <Link className="show-card-link" to={`/show/${show.id}`}>
         <div className="show-card-poster">
-          {show.image && show.image.medium ? (
+          {show.image?.medium ? (
             <img
               className="show-card-image"
               src={show.image.medium}
               alt={show.name}
+              data-placeholder-class="show-card-placeholder"
+              onError={handleImageError}
             />
           ) : (
             <div className="show-card-placeholder">No Image</div>
