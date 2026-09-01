@@ -47,14 +47,17 @@ function ManageShows() {
 
   async function handleSubmit(payload) {
     if (editingShow) {
-      await updateShow(editingShow.id, payload)
+      const updated = await updateShow(editingShow.id, payload)
+      setShows((prev) =>
+        prev.map((s) => (s.id === updated.id ? updated : s))
+      )
     } else {
-      await createShow(payload)
+      const created = await createShow(payload)
+      setShows((prev) => [...prev, created])
     }
 
     setFormOpen(false)
     setEditingShow(null)
-    await loadShows()
   }
 
   async function handleDelete(show) {
@@ -66,7 +69,7 @@ function ManageShows() {
 
     try {
       await deleteShow(show.id)
-      await loadShows()
+      setShows((prev) => prev.filter((s) => s.id !== show.id))
     } catch {
       alert('Failed to delete show.')
     } finally {
