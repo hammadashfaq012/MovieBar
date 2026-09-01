@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://cinefind-backend.vercel.app/'
+const BACKEND_URL = 'https://cinefind-backend.vercel.app'
 
 export async function getShows() {
   const response = await fetch(`${BACKEND_URL}/api/shows`)
